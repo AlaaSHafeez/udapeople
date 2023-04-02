@@ -38,14 +38,14 @@ commands:
   notify_on_failure:
     steps:
       - slack/notify:
-          channel: circleci-pipeline
+          channel: ${SLACK_DEFAULT_CHANNEL}
           event: fail
           template: basic_fail_1
           
   notify_on_success:
     steps:
       - slack/notify:
-          channel: circleci-pipeline
+          channel: ${SLACK_DEFAULT_CHANNEL}
           event: pass
           template: success_tagged_deployment_1
 #   destroy-environment:
@@ -218,7 +218,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - .circleci/ansible/inventory.txt
+            - project/.circleci/ansible/inventory.txt
 
       # - destroy-environment
 
