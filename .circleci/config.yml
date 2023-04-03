@@ -284,7 +284,7 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: alaa24/awscli
+      - image: alaa24/awscli:1.0.0
         auth:
           username: $USERNAME
           password: $PASSWORD
@@ -308,7 +308,7 @@ jobs:
 
   run-migrations:
     docker: 
-      - image: alaa24/awscli
+      - image: alaa24/awscli:1.0.0
         auth:
           username: $USERNAME
           password: $PASSWORD
@@ -326,7 +326,7 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: alaa24/awscli
+      - image: alaa24/awscli:1.0.0
         auth:
           username: $USERNAME
           password: $PASSWORD
@@ -349,7 +349,7 @@ jobs:
                     
   deploy-backend:
     docker:
-      - image: alaa24/awscli
+      - image: alaa24/awscli:1.0.0
         auth:
           username: $USERNAME
           password: $PASSWORD
@@ -398,7 +398,7 @@ jobs:
 
   cloudfront-update:
     docker:
-      - image: alaa24/awscli
+      - image: alaa24/awscli:1.0.0
         auth:
           username: $USERNAME
           password: $PASSWORD
@@ -423,7 +423,7 @@ jobs:
 
   cleanup:
     docker:
-      - image: alaa24/awscli
+      - image: alaa24/awscli:1.0.0
         auth:
           username: $USERNAME
           password: $PASSWORD
