@@ -290,14 +290,13 @@ jobs:
           password: $PASSWORD
     steps:
       - checkout
-      # - install_awscli
-      - install_ansible
       - add_ssh_keys:
           fingerprints: ["59:bd:22:59:e1:b6:31:9b:af:aa:f2:08:38:5d:22:0b"]
       # - run:
       #     name: "Install Dependencies"
       #     command: |
       #       apk add ansible gzip openssh-client
+      - install_ansible
       - attach_workspace:
           at: ~/
       - run:
