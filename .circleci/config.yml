@@ -48,6 +48,7 @@ commands:
           channel: ${SLACK_DEFAULT_CHANNEL}
           event: pass
           template: success_tagged_deployment_1
+
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     parameters:
@@ -396,13 +397,12 @@ jobs:
       - destroy_environment
 
   cloudfront-update:
-
     docker:
       - image: alaa24/awscli
         auth:
           username: $USERNAME
           password: $PASSWORD
-  steps:
+    steps:
       - checkout
       - run:
           name: Save Old Workflow ID to kvdb.io
