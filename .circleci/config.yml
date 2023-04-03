@@ -296,6 +296,8 @@ jobs:
       #     name: "Install Dependencies"
       #     command: |
       #       apk add ansible gzip openssh-client
+      - install_awscli
+      - install_ansible
       - attach_workspace:
           at: ~/
       - run:
