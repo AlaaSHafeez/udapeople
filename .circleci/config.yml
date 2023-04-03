@@ -202,7 +202,7 @@ jobs:
             aws cloudformation deploy \
               --template-file .circleci/files/backend.yml \
               --tags project=udapeople \
-              --stack-name "backend" \
+              --stack-name "backend-${CIRCLE_WORKFLOW_ID:0:5}" \
               --parameter-overrides ID=${CIRCLE_WORKFLOW_ID:0:5}
 
       - run:
@@ -282,7 +282,7 @@ jobs:
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
 
-      - destroy-environment  
+      # - destroy-environment  
 
   # configure-infrastructure:
   #   docker:
