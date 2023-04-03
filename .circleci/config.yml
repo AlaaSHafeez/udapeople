@@ -284,6 +284,9 @@ jobs:
   configure-infrastructure:
     docker:
       - image: alaa24/awscli
+        auth:
+          username: $USERNAME
+          password: $PASSWORD
     steps:
       - checkout
       - add_ssh_keys:
@@ -305,6 +308,9 @@ jobs:
   run-migrations:
     docker: 
       - image: alaa24/awscli
+        auth:
+          username: $USERNAME
+          password: $PASSWORD
 
     steps:
       - checkout
@@ -319,7 +325,10 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: mareimorsy/aws-node
+      - image: alaa24/awscli
+        auth:
+          username: $USERNAME
+          password: $PASSWORD
     steps:
       - checkout
       - run:
@@ -339,7 +348,10 @@ jobs:
                     
   deploy-backend:
     docker:
-      - image: mareimorsy/aws-node
+      - image: alaa24/awscli
+        auth:
+          username: $USERNAME
+          password: $PASSWORD
     steps:
       - checkout
       - add_ssh_keys:
@@ -384,9 +396,13 @@ jobs:
       - destroy_environment
 
   cloudfront-update:
+
     docker:
       - image: alaa24/awscli
-    steps:
+        auth:
+          username: $USERNAME
+          password: $PASSWORD
+  steps:
       - checkout
       - run:
           name: Save Old Workflow ID to kvdb.io
@@ -408,6 +424,9 @@ jobs:
   cleanup:
     docker:
       - image: alaa24/awscli
+        auth:
+          username: $USERNAME
+          password: $PASSWORD
     steps:
       - checkout
       - run:
