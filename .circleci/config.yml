@@ -331,7 +331,7 @@ jobs:
             fi
       - notify_on_failure
       - notify_on_success
-      - destroy_environment
+      - destroy-environment
 
   cloudfront-update:
     docker:
