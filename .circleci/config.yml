@@ -330,6 +330,7 @@ jobs:
               exit 1
             fi
       - notify_on_failure
+      - notify_on_success
       # - destroy_environment
 
   cloudfront-update:
