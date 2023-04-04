@@ -24,16 +24,16 @@ commands:
             sudo add-apt-repository --yes --update ppa:ansible/ansible
             sudo apt install ansible -y
 
-  install_nodejs:
-    description: Install Node 13.8.0
-    steps:
-      - run:
-          name: Install Node 13.8.0
-          command: |
-            curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-            sudo apt install -y nodejs
-            sudo npm install --global n
-            sudo n 13.8.0
+  # install_nodejs:
+  #   description: Install Node 13.8.0
+  #   steps:
+  #     - run:
+  #         name: Install Node 13.8.0
+  #         command: |
+  #           curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+  #           sudo apt install -y nodejs
+  #           sudo npm install --global n
+  #           sudo n 13.8.0
 
   notify_on_failure:
     steps:
@@ -54,7 +54,7 @@ commands:
     parameters:
       Workflow_ID:
         type: string
-        default: ${CIRCLE_WORKFLOW_ID:0:7}
+        default: ${CIRCLE_WORKFLOW_ID:0:5}
     steps:
       - run:
           name: Destroy environments
