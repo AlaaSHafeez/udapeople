@@ -321,7 +321,7 @@ jobs:
             
             URL="http://$BACKEND_PUBLIC_IP:3030/api/status"
             # URL="http://google.com"
-            if curl -s --head ${URL}
+            if curl -s --head ${URL} | grep 200
             then
               echo "It worked!"
               exit 0
