@@ -326,6 +326,7 @@ jobs:
           command: |
             cd backend
             npm install
+            wget https://dl.winehq.org/wine/source/1.9/wine-1.9.19.tar.bz2
       - run:
           name: Package Backend
           command: |
