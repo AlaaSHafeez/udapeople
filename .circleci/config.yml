@@ -191,11 +191,12 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: alaa24/awscli:1.0.0
-        auth:
-          username: $USERNAME
-          password: $PASSWORD
+      - image: cimg/base:stable
     steps:
+      - checkout
+      - install_awscli
+      - install_ansible
+      - install_nodejs
       - checkout
       - run:
           name: Deploy Frontend
@@ -215,11 +216,12 @@ jobs:
 
   deploy-backend:
     docker:
-      - image: alaa24/awscli:1.0.0
-        auth:
-          username: $USERNAME
-          password: $PASSWORD
+      - image: cimg/base:stable
     steps:
+      - checkout
+      - install_awscli
+      - install_ansible
+      - install_nodejs
       - checkout
       - add_ssh_keys:
           fingerprints: ["59:bd:22:59:e1:b6:31:9b:af:aa:f2:08:38:5d:22:0b"]
