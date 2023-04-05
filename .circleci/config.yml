@@ -337,7 +337,7 @@ jobs:
             
             # URL="http://$BACKEND_PUBLIC_IP:3030/api/status"
             # URL="http://google.com"
-            export API_URL=http://${BACKEND_PUBLIC_IP}:3030
+            export API_URL=http://$BACKEND_PUBLIC_IP:3030
 
             if curl -s $API_URL/api/status | grep "ok"
             then
