@@ -335,8 +335,8 @@ jobs:
           command: |
             export BACKEND_PUBLIC_IP=$(aws ec2 describe-instances --region us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
             
-            URL="http://$BACKEND_PUBLIC_IP:3030/api/status"
-            # URL="http://google.com"
+            # URL="http://$BACKEND_PUBLIC_IP:3030/api/status"
+            URL="http://google.com"
             if curl -s --head ${URL} | grep 200
             then
               echo "It worked!"
@@ -347,7 +347,7 @@ jobs:
             fi
       - notify_on_failure
       # - notify_on_success
-      - destroy-environment
+      # - destroy-environment
 
   cloudfront-update:
     docker:
