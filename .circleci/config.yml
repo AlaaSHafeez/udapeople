@@ -312,8 +312,8 @@ jobs:
           command: |
             # # # export TYPEORM_HOST=$(aws ec2 describe-instances --region us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
             cd backend
-            npm install --force
-            # npm run premigrations
+            npm install 
+            npm run premigrations
             npm run migrations > migrations_dump.txt
       - run:
           name: Send migration status to kvdb.io
@@ -349,7 +349,7 @@ jobs:
             fi
       - notify_on_failure
       # - notify_on_success
-      # - destroy-environment
+      - destroy-environment
 
   cloudfront-update:
     docker:
