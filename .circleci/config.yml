@@ -345,7 +345,7 @@ jobs:
             URL="http://go0gle.com"
             # export API_URL=http://$BACKEND_PUBLIC_IP:3030
             echo $API_URL
-            echo $(curl -s $URL )
+            curl -s $URL
             if curl -s $URL 
             then
               echo "It worked!"
