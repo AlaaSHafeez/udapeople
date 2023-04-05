@@ -274,7 +274,7 @@ jobs:
       - run:
           name: Add back-end ip to ansible inventory
           command: |
-            aws ec2 describe-instances --region us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> .circleci/ansible/inventory.txt
+            aws ec2 describe-instances --region us-east-1  --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:5}"  --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> .circleci/ansible/inventory.txt
 
       - persist_to_workspace:
           root: ~/
@@ -313,7 +313,7 @@ jobs:
       - run:
           name: Run migrations
           command: |
-            # # # export TYPEORM_HOST=$(aws ec2 describe-instances --region us-east-1  --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
+            # # # export TYPEORM_HOST=$(aws ec2 describe-instances --region us-east-1 --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:5}" --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
             cd backend
             npm install 
             npm run premigrations
@@ -336,7 +336,7 @@ jobs:
       - run:
           name: Backend smoke test.
           command: |
-            export BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
+            export BACKEND_PUBLIC_IP=$(aws ec2 describe-instances --region us-east-1 \
               --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:5}" \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
