@@ -338,7 +338,7 @@ jobs:
             # URL="http://$BACKEND_PUBLIC_IP:3030/api/status"
             # URL="http://google.com"
             export API_URL=http://$BACKEND_PUBLIC_IP:3030
-
+            echo $API_URL
             if curl -s $API_URL/api/status | grep "ok"
             then
               echo "It worked!"
