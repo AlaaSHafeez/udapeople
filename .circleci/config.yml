@@ -344,8 +344,9 @@ jobs:
             # URL="http://$BACKEND_PUBLIC_IP:3030/api/status"
             URL="http://go0gle.com"
             # export API_URL=http://$BACKEND_PUBLIC_IP:3030
-            echo $API_URL
-            curl -s $URL
+            # echo $API_URL
+            STATUS=$(curl -s $URL)
+            echo $STATUS
             if curl -s $URL 
             then
               echo "It worked!"
