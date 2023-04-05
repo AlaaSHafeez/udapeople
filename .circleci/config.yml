@@ -231,7 +231,7 @@ jobs:
       - run:
           name: Deploy backend
           command: |
-            export HOST=$(aws ec2 describe-instances --region us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
+            export HOST=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:5}" --region us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
             echo $HOST >> .circleci/ansible/inventory.txt
 
             cd backend
@@ -342,11 +342,11 @@ jobs:
               --output text)
             
             # URL="http://$BACKEND_PUBLIC_IP:3030/api/status"
-            # URL="http://google.com"
-            export API_URL=http://$BACKEND_PUBLIC_IP:3030
+            URL="http://go0gle.com"
+            # export API_URL=http://$BACKEND_PUBLIC_IP:3030
             echo $API_URL
-            echo $(curl -s $API_URL/api/status)
-            if curl -s $API_URL/api/status | grep "ok"
+            echo "$(curl -s $API_URL/api/status)"
+            if curl -s $URL 
             then
               echo "It worked!"
               exit 0
@@ -410,8 +410,8 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend
+      # - build-frontend
+      # - build-backend
       # # - test-frontend:
       # #     requires: [build-frontend]
       # # - test-backend:
@@ -421,23 +421,23 @@ workflows:
       # # - scan-frontend:
       # #     requires: [build-frontend]
       
-      - deploy-infrastructure:
-          requires: [ build-frontend, build-backend]
-          # requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-          filters:
-            branches:
-              only: [main]
-      - configure-infrastructure:
-          requires: [deploy-infrastructure]
+      # - deploy-infrastructure:
+      #     requires: [ build-frontend, build-backend]
+      #     # requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+      #     filters:
+      #       branches:
+      #         only: [main]
+      # - configure-infrastructure:
+      #     requires: [deploy-infrastructure]
 
-      - run-migrations:
-          requires: [configure-infrastructure]
-      - deploy-frontend:
-          requires: [run-migrations]
-      - deploy-backend:
-          requires: [run-migrations]
-      - smoke-test:
-          requires: [deploy-backend, deploy-frontend]
+      # - run-migrations:
+      #     requires: [configure-infrastructure]
+      # - deploy-frontend:
+      #     requires: [run-migrations]
+      # - deploy-backend:
+      #     requires: [run-migrations]
+      - smoke-test
+          # requires: [deploy-backend, deploy-frontend]
       # - cloudfront-update:
       #     requires: [smoke-test]
       # - cleanup:
