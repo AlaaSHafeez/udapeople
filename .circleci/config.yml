@@ -211,7 +211,8 @@ jobs:
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:5} --recursive
 
 #       # Here's where you will add some code to rollback on failure      
-                    
+      - destroy-environment
+
   deploy-backend:
     docker:
       - image: alaa24/awscli:1.0.0
@@ -237,6 +238,7 @@ jobs:
             cd ~/project/.circleci/ansible
             ansible-playbook -i inventory.txt deploy-backend.yml
       # Here's where you will add some code to rollback on failure  
+      - destroy-environment              
 
   deploy-infrastructure:
     docker:
@@ -274,7 +276,7 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt   
             
-      # - destroy-environment
+      - destroy-environment
 
   configure-infrastructure:
     docker:
@@ -294,7 +296,7 @@ jobs:
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
 
-      # - destroy-environment  
+      - destroy-environment  
 
   run-migrations:
     docker: 
@@ -318,6 +320,8 @@ jobs:
             then
               curl -d '1' https://kvdb.io/${KVDB_BUCKET_ID}/migration_${CIRCLE_WORKFLOW_ID:0:5} 
             fi
+      - destroy-environment 
+      - revert-migrations             
 
   smoke-test:
     docker:
@@ -340,8 +344,8 @@ jobs:
               exit 1
             fi
       - notify_on_failure
-      - notify_on_success
-      # - destroy-environment
+      # - notify_on_success
+      - destroy-environment
 
   cloudfront-update:
     docker:
