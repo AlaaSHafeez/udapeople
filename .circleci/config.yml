@@ -272,6 +272,7 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt   
+            
       # - destroy-environment
 
   configure-infrastructure:
@@ -570,8 +571,8 @@ jobs:
 workflows:
   default:
     jobs:
-      # - build-frontend
-      # - build-backend
+      - build-frontend
+      - build-backend
       # - test-frontend:
       #     requires: [build-frontend]
       # - test-backend:
