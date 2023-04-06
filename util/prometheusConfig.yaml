@@ -31,7 +31,6 @@ scrape_configs:
             values: [udapeople]
     relabel_configs:
       - source_labels: [__meta_ec2_tag_project, __meta_ec2_tag_Name]
-        separator: "_"
         target_label: "instance"
       - source_labels: [__meta_ec2_instance_id]
         target_label: "instance_id"
