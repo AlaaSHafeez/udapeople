@@ -428,12 +428,11 @@ jobs:
 
   cleanup:
     docker:
-      - image: alaa24/awscli:1.0.0
-        auth:
-          username: $USERNAME
-          password: $PASSWORD
+      - image: cimg/base:stable
     steps:
       - checkout
+      - install_awscli
+      - install_nodejs
       - run:
           name: Remove old stacks and files
           command: |
@@ -480,7 +479,7 @@ workflows:
       - deploy-backend:
           requires: [run-migrations]
       - smoke-test:
-          requires: [deploy-backend]
+          requires: [deploy-backend, deploy-frontend]
       - cloudfront-update:
           requires: [smoke-test]
       # - cleanup:
