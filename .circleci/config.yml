@@ -317,10 +317,10 @@ jobs:
       - install_nodejs
       - add_ssh_keys:
           fingerprints: ["59:bd:22:59:e1:b6:31:9b:af:aa:f2:08:38:5d:22:0b"]
-      # - attach_workspace:
-      #     at: ~/
-      # - restore_cache:
-      #     keys: [backend-cashe]
+      - attach_workspace:
+          at: ~/
+      - restore_cache:
+          keys: [backend-cashe]
       - run:
           name: Deploy backend
           command: |
@@ -454,8 +454,8 @@ jobs:
 workflows:
   default:
     jobs:
-      # - build-frontend
-      # - build-backend
+      - build-frontend
+      - build-backend
       # - test-frontend:
       #     requires: [build-frontend]
       # - test-backend:
