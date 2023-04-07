@@ -1,5 +1,5 @@
 Monitoring metrics
-[SCREENSHOTII]
+[SCREENSHOTs 10-*]
 CPU Usage
 avg(rate(node_cpu_seconds_total{mode!="idle"}[1m])) by (instance) * 100
 Available Memory
