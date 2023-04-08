@@ -82,11 +82,11 @@ commands:
             if [[ "${SUCCESS}" == "1" ]];
             then
               cd ~/project/backend
-              # npm install --force
               curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
               sudo apt install -y nodejs
               sudo npm install --global n
               sudo n 13.8.0
+              npm install --force
               npm run migrations:revert
             fi
             
