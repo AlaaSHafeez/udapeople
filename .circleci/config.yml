@@ -82,7 +82,7 @@ commands:
             if [[ "${SUCCESS}" == "1" ]];
             then
               cd ~/project/backend
-              npm install --force
+              npm install
               npm run migrations:revert
             fi
             
@@ -93,7 +93,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-cashe]
+          keys: [frontend-cache]
       - run:
           name: Build front-end
           command: |
@@ -102,7 +102,7 @@ jobs:
             npm run build
       - save_cache:
           paths: [frontend/node_modules]
-          key: frontend-cashe
+          key: frontend-cache
       - notify_on_failure
 
   build-backend:
@@ -111,7 +111,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-cashe]
+          keys: [backend-cache]
       - run:
           name: Back-end build
           command: |
@@ -120,7 +120,7 @@ jobs:
             npm run build
       - save_cache:
           paths: [backend/node_modules]
-          key: backend-cashe
+          key: backend-cache
       - notify_on_failure
 
   test-frontend:
@@ -129,7 +129,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-cashe]
+          keys: [frontend-cache]
       - run:
           name: Test front-end
           command: |
@@ -144,7 +144,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-cashe]
+          keys: [backend-cache]
       - run:
           name: Test back-end
           command: |
@@ -160,7 +160,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-cashe]
+          keys: [frontend-cache]
       - run:
           name: Scan frontend
           command: |
@@ -178,7 +178,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-cashe]
+          keys: [backend-cache]
       - run:
           name: Scan backend
           command: |
@@ -255,8 +255,6 @@ jobs:
     steps:
       - checkout
       - install_awscli
-      - attach_workspace:
-          at: ~/
       - run:
           name: Run migrations
           command: |
@@ -284,7 +282,7 @@ jobs:
       - install_ansible
       - install_nodejs
       - restore_cache:
-          keys: [frontend-cashe]
+          keys: [frontend-cache]
       - run:
           name: Install dependencies
           command: |
@@ -321,8 +319,8 @@ jobs:
           fingerprints: ["59:bd:22:59:e1:b6:31:9b:af:aa:f2:08:38:5d:22:0b"]
       - attach_workspace:
           at: ~/
-      # - restore_cache:
-      #     keys: [backend-cashe]
+      - restore_cache:
+          keys: [backend-cache]
       - run:
           name: Deploy backend
           command: |
