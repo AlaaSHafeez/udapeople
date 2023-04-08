@@ -89,6 +89,7 @@ commands:
               npm install --force
               npm run migrations:revert
             fi
+            cat /home/circleci/.npm/_logs/2023-04-08T*
             
 jobs:
   build-frontend:
