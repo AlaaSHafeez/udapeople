@@ -43,12 +43,12 @@ commands:
           event: fail
           template: basic_fail_1
           
-  notify_on_success:
-    steps:
-      - slack/notify:
-          channel: ${SLACK_DEFAULT_CHANNEL}
-          event: pass
-          template: success_tagged_deploy_1
+  # notify_on_success:
+  #   steps:
+  #     - slack/notify:
+  #         channel: ${SLACK_DEFAULT_CHANNEL}
+  #         event: pass
+  #         template: success_tagged_deploy_1
 
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
